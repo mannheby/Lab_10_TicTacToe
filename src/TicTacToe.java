@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class TicTacToe
 {
-    private static final int ROW = 3;
-    private static final int COL = 3;
-    private static String board [][] = new String [ROW][COL];
+    private static final int ROW = 3; // matrix row amount
+    private static final int COL = 3; // matrix column amount
+    private static String board [][] = new String [ROW][COL]; // creates matrix
 
     public static void main(String[] args)
     {
@@ -20,12 +20,12 @@ public class TicTacToe
             clearBoard();
             do
             {
-                xCoord = SafeInput.getRangedInt(in, "Which row do you want your next move to be in?", 1, 3);
+                xCoord = SafeInput.getRangedInt(in, "Which row do you want your next move to be in?", 1, 3); // gets ranged int for coords
                 yCoord = SafeInput.getRangedInt(in, "Which column do you want your next move to be in?", 1, 3);
-                xCoord--;
+                xCoord--; // subtract 1 to go from human language to matrix language
                 yCoord--;
                 moveCount ++;
-                if (moveCount % 2 == 0)
+                if (moveCount % 2 == 0) // alternates the player that goes starting with X
                 {
                     player = "O";
                 }
@@ -40,23 +40,23 @@ public class TicTacToe
                 }
                 else
                 {
-                    System.out.println("You can't play there. Try again.");
+                    System.out.println("You can't play there. Try again."); // out put if move is invalid
                     moveCount --;
                 }
                 if(moveCount >= 5)
                 {
-                    if (isWin("X"))
+                    if (isWin("X")) // if x wins
                     {
                         gameOver = true;
                         System.out.println("Player 1 wins!");
                     }
-                    else if (isWin("O"))
+                    else if (isWin("O")) // of o wins
                     {
                         gameOver = true;
                         System.out.println("Player 2 wins!");
                     }
                 }
-                if (moveCount >= 7 && isTie())
+                if (moveCount >= 7 && isTie()) //f there is a tie
                 {
                     gameOver = true;
                     System.out.println("It is a tie.");
@@ -78,13 +78,13 @@ public class TicTacToe
         }
     }
 
-    private static void display()
+    private static void display() // displays the board
     {
         for(int x = 0; x < ROW; x++) // loops through all rows
         {
             for(int y = 0; y < COL; y++) // loops through all columns
             {
-                System.out.print(board[x][y] + " | ");
+                System.out.print(board[x][y] + " | "); // prints board
             }
             System.out.println();
         }
@@ -92,12 +92,12 @@ public class TicTacToe
 
     private static boolean isValidMove(int x, int y)
     {
-        return board[x][y].equals(" ");
+        return board[x][y].equals(" "); // return true if there is a space in the cell
     }
 
     private static boolean isWin(String player)
     {
-        if(isRowWin(player) || isColWin(player) || isDiaWin(player))
+        if(isRowWin(player) || isColWin(player) || isDiaWin(player)) // player wins if a column, row, diagonal is filled
         {
             return true;
         }
